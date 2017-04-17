@@ -91,15 +91,17 @@ hibernate:
 dataSource:
     pooled: true
     jmxExport: true
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
+    driverClassName: com.mysql.jdbc.Driver
+    username: admin
+    password: Grailse56
 
 environments:
     development:
         dataSource:
-            dbCreate: create-drop
-            url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            dbCreate: update
+            url: jdbc:mysql://tradingcards.cjfl2qrl5jho.us-east-1.rds.amazonaws.com:3306/cards
+            properties:
+              validationQuery: SELECT 1
     test:
         dataSource:
             dbCreate: update

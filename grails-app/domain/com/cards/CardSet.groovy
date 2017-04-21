@@ -6,8 +6,9 @@ import groovy.transform.TupleConstructor
 class CardSet {
 
     int year
-    Brand brand
-    def cards = []
+
+    static hasOne = [brand:Brand]
+    static hasMany = [cards:Card]
 
     static constraints = {
         year nullable:false

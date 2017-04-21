@@ -8,7 +8,7 @@ import spock.lang.Specification
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
 @TestFor(Brand)
-//@Mock(CardSet)
+@Mock([Brand,CardSet])
 class BrandSpec extends Specification {
 
     def setup() {
@@ -36,7 +36,8 @@ class BrandSpec extends Specification {
         when:"New brand is created with a card set"
             CardSet set = new CardSet()
             Brand newBrand = new Brand(name:"test brand")
-            newBrand.cardSets.add(set)
+            newBrand.addToCardSets(set)
+
 
         then:"Brand is valid"
             newBrand.validate()

@@ -1,13 +1,18 @@
 package com.cards
 
+import groovy.transform.TupleConstructor
+
+@TupleConstructor
 class CardSet {
 
     int year
-    static hasMany = [cards:Card]
-
-    static hasOne = [brand:Brand]
+    Brand brand
+    def cards = []
 
     static constraints = {
-        unique: ['year','brand']
+        year nullable:false
+        year min: 1920
+        year max: Calendar.getInstance().get(Calendar.YEAR)
+        brand(unique:'year')
     }
 }

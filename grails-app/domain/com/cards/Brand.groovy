@@ -4,6 +4,8 @@ class Brand {
 
     String name
 
+    static hasMany = [cardSets: CardSet]
+
     static constraints = {
     }
 }

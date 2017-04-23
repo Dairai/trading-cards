@@ -11,21 +11,15 @@
       match up with other collectors for the most efficient exchange of cards to complete 
       their respective sets?
       
-       
-      
       LastFewCards is a collectible card webapp that allows collectors to easily check off 
       which cards they have in each particular set they are building, then share the list 
       of missing cards with fellow collectors.  Users can also list the cards of which they 
       have extra copies - so that they have some trading power with other users in order to 
       obtain the cards they are missing.  
       
-       
-      
       Queries in the background match collectors based on how many cards the other collectors 
       have that a particular user needs - allowing for efficient exchange and faster set 
       building.
-      
-       
       
       Problems solved with this project:
       
@@ -39,9 +33,7 @@
       instead of 1 card each in 20 packages; the point of the webapp is to efficiently map 
       user connections by card count needed.
        
-      
       Project Team:   David Morgan
-      
                       Dairai Nyabando
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en" class="no-js" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -78,16 +78,13 @@
 		                </li>
 	                <sec:ifLoggedIn>
 		                <li>
-			                <a>Logged in as <sec:username/></a>
-		                </li>
-		                <li><a>
-			                <button><g:form controller="logout" type="POST"><input class="btn btn-link" style="color: black !important;" type="submit" value="LOGOUT" /></g:form></button>
-		                </a>
+			                <span style="font-size: small; color:cornflowerblue;"> Logged in as <sec:username/> </span>
+			                <button><g:form controller="logout" type="POST"><input class="btn btn-link btn-xs" style="color: black !important;" type="submit" value="LOGOUT" /></g:form></button>
 		                </li>
 	                </sec:ifLoggedIn>
 	                <sec:ifNotLoggedIn>
 		                <li><a>
-			                <button><g:form controller="login" type="POST"><input class="btn btn-link" style="color: black !important;" type="submit" value="LOGIN" /></g:form></button>
+			                <button><g:form controller="login" type="POST"><input class="btn btn-link btn-xs" style="color: black !important;" type="submit" value="LOGIN" /></g:form></button>
 		                </a>
 		                </li>
 	                </sec:ifNotLoggedIn>

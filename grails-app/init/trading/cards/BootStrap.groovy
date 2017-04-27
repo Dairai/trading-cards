@@ -10,8 +10,6 @@ class BootStrap {
 
     def init = { servletContext ->
 
-	    UserRole.create(admin,adminRole)
-	    UserRole.create(admin,userRole)
     }
 
 	def saveObject(object) {

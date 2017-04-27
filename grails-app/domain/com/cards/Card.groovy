@@ -2,7 +2,7 @@ package com.cards
 
 class Card {
 
-    int number
+    int number                          //future upgrade: make string for cards with char in card number
 
     static belongsTo = [set: CardSet]
 

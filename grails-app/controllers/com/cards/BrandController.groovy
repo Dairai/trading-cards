@@ -2,8 +2,10 @@ package com.cards
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
+@Secured([Role.ROLE_ADMIN])
 class BrandController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]

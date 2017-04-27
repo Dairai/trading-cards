@@ -2,8 +2,10 @@ package com.cards
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
+@Secured([Role.ROLE_ADMIN])
 class CardSetController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -11,6 +13,16 @@ class CardSetController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond CardSet.list(params), model:[cardSetCount: CardSet.count()]
+    }
+
+    @Secured([Role.ROLE_USER])
+    def showAllCardSets() {
+        render view: 'index'
+    }
+
+    def searchByManufacturer() {
+        List allBrands = Brand.findAll()
+        render view: 'byBrand', model:[brands:allBrands]
     }
 
     def show(CardSet cardSet) {

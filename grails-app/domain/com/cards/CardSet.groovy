@@ -6,6 +6,7 @@ import groovy.transform.TupleConstructor
 class CardSet {
 
     int year
+    String cardSetImageURL
     // future upgrade: include - string setName - which will allow for sub-sets
 
     static hasOne = [brand:Brand, sport:Sport]

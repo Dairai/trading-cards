@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <asset:stylesheet src="application.css"/>
+    <asset:stylesheet src="bootstrap.css" />
+    <asset:stylesheet src="main.css" />
 
     <g:layoutHead/>
 	<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
@@ -29,11 +31,12 @@
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
 </head>
+
 <body>
 
-    <div class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
+    <div class="navbar navbar-default navbar-static-top darkback" role="navigation">
+        <div class="container darkback">
+            <div class="navbar-header darkback">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -49,6 +52,45 @@
             <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
                 <ul class="nav navbar-nav navbar-right">
                     <g:pageProperty name="page.nav" />
+		                <li class="dropdown">
+			                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">How To Join<span class="caret"></span></a>
+			                <ul class="dropdown-menu">
+				                <li><a href="#">Membership</a></li>
+				                <li><a href="#">Join Now!</a></li>
+				                <li><a href="#">Site Rules</a></li>
+			                </ul>
+		                </li>
+		                <li class="dropdown">
+			                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Current Sets<span class="caret"></span></a>
+			                <ul class="dropdown-menu">
+				                <li><a href="#">List By Manufacturer</a></li>
+				                <li><a href="#">List By Year</a></li>
+				                <li><a href="#">List By Num Cards Available</a></li>
+			                </ul>
+		                </li>
+		                <li class="dropdown">
+			                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+			                <ul class="dropdown-menu">
+				                <li><a href="#">How to Use This Site</a></li>
+				                <li><a href="#">File a Complaint</a></li>
+				                <li><a href="#">About Us</a></li>
+			                </ul>
+		                </li>
+	                <sec:ifLoggedIn>
+		                <li>
+			                <a>Logged in as <sec:username/></a>
+		                </li>
+		                <li><a>
+			                <button><g:form controller="logout" type="POST"><input class="btn btn-link" style="color: black !important;" type="submit" value="LOGOUT" /></g:form></button>
+		                </a>
+		                </li>
+	                </sec:ifLoggedIn>
+	                <sec:ifNotLoggedIn>
+		                <li><a>
+			                <button><g:form controller="login" type="POST"><input class="btn btn-link" style="color: black !important;" type="submit" value="LOGIN" /></g:form></button>
+		                </a>
+		                </li>
+	                </sec:ifNotLoggedIn>
                 </ul>
             </div>
         </div>
@@ -58,11 +100,17 @@
 
     <div class="footer" role="contentinfo"></div>
 
+	<asset:javascript src="jquery-2.2.0.min.js" />
+	<asset:javascript src="application.js"/>
+
     <div id="spinner" class="spinner" style="display:none;">
         <g:message code="spinner.alt" default="Loading&hellip;"/>
     </div>
 
-    <asset:javascript src="application.js"/>
+<script>
+    $(".nav li").removeClass("active");
+    $('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
+</script>
 
 </body>
 </html>

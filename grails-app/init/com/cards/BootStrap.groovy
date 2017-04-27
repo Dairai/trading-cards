@@ -1,4 +1,4 @@
-package trading.cards
+package com.cards
 
 import com.cards.User
 import com.cards.Role

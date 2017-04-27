@@ -8,7 +8,7 @@ class CardSet {
     int year
     // future upgrade: include - string setName - which will allow for sub-sets
 
-    static hasOne = [brand:Brand]
+    static hasOne = [brand:Brand, sport:Sport]
     static hasMany = [cards:Card]
 
     static constraints = {

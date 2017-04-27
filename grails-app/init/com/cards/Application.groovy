@@ -1,4 +1,4 @@
-package trading.cards
+package com.cards
 
 import grails.boot.GrailsApp
 import grails.boot.config.GrailsAutoConfiguration

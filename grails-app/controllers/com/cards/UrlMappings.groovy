@@ -1,4 +1,4 @@
-package trading.cards
+package com.cards
 
 class UrlMappings {
 

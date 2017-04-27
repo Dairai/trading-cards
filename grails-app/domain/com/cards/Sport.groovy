@@ -2,10 +2,11 @@ package com.cards
 
 class Sport {
 
-    String sport
+    String sportName
 
-    static belongsTo = [cardset:CardSet]
+    static hasMany = [cardSets:CardSet]
 
     static constraints = {
+        sportName inList: ['Baseball', 'Hockey', 'Football', 'Soccer', 'Basketball']
     }
 }

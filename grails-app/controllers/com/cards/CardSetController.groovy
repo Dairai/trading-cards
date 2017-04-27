@@ -25,6 +25,16 @@ class CardSetController {
         render view: 'byBrand', model:[brands:allBrands]
     }
 
+    def searchByYear() {
+        List allYears = CardSet.findAll()
+        render view: 'byYear', model:[years:allYears]
+    }
+
+    def searchBySport() {
+        List allSports = Sport.findAll()
+        render view: 'bySport', model:[sports:allSports]
+    }
+
     def show(CardSet cardSet) {
         respond cardSet
     }

@@ -48,10 +48,9 @@ class CardSetController {
     }
 
     @Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
-    def showCardSet() {
-        def cardset = CardSet.get(params.id)
-        List currentCardSet = CardSet.findBy(cardset)
-        render view: 'showCardSet', model:[currentcardset:currentcardset]
+    def showCardSet(CardSet cardset) {
+        def thiscardset = CardSet.find(cardset)
+        render view: 'showCardSet', model:[thiscardset:thiscardset]
     }
 
     @Secured([Role.ROLE_ADMIN, Role.ROLE_USER])

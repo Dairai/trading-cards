@@ -20,7 +20,7 @@ class CardSetController {
         render view: 'searchType'
     }
 
-	@Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
+	@Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS])
     def searchByBrand() {
         List allBrands = Brand.findAll()
         render view: 'byBrand', model:[brands:allBrands]
@@ -51,6 +51,12 @@ class CardSetController {
     def showCardSet(CardSet cardset) {
         def thiscardset = CardSet.find(cardset)
         render view: 'showCardSet', model:[thiscardset:thiscardset]
+    }
+
+    @Secured([Role.ROLE_USER,Role.ROLE_ADMIN])
+    def userSets() {
+        List usersets = CardSet.findAll()
+        render view: 'showUserSets', model:[usersets:usersets]
     }
 
     @Secured([Role.ROLE_ADMIN, Role.ROLE_USER])

@@ -7,5 +7,6 @@ class UserCard {
     static hasOne = [user:User, card:Card]
 
     static constraints = {
+        // need constraint for unique: user / card
     }
 }

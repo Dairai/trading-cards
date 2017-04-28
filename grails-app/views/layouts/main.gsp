@@ -85,9 +85,10 @@
 
         <g:layoutBody/>
 
-        <div class="row">
+        <div class="row" id="footer">
             <div clas="col-lg-10">
                 <div class="footer" role="contentinfo" style="background-color: steelblue">
+                    Copyright 2017 - Morgan & Nyanbando
                 </div>
             </div>
         </div>

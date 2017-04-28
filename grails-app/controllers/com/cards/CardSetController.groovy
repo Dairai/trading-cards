@@ -17,7 +17,7 @@ class CardSetController {
 
     @Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
     def showAllCardSets() {
-        render view: 'index'
+        render view: 'searchType'
     }
 
 	@Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
@@ -26,7 +26,15 @@ class CardSetController {
         render view: 'byBrand', model:[brands:allBrands]
     }
 
-	@Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
+    @Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
+    def showBrand() {
+        def brand = Brand.get(params.id)
+        List brandCardSets = CardSet.findAllByBrand(brand)
+        brandCardSets = brandCardSets.sort{it.year}
+        render view: 'showBrand', model:[brandcardsets:brandCardSets]
+    }
+
+    @Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
     def searchByYear() {
 		def allYears = CardSet.findAll().year
 		allYears = allYears.sort{it}.unique()
@@ -37,6 +45,18 @@ class CardSetController {
     def searchBySport() {
         List allSports = Sport.findAll()
         render view: 'bySport', model:[sports:allSports]
+    }
+
+    @Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
+    def showCardSet() {
+        def cardset = CardSet.get(params.id)
+        List currentCardSet = CardSet.findBy(cardset)
+        render view: 'showCardSet', model:[currentcardset:currentcardset]
+    }
+
+    @Secured([Role.ROLE_ADMIN, Role.ROLE_USER])
+    def userInput() {
+        render view: 'userInput'
     }
 
     def show(CardSet cardSet) {

@@ -52,7 +52,7 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Current Sets<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="/CardSet/searchByManufacturer">List By Manufacturer</a></li>
+                                        <li><a href="/CardSet/searchByBrand">List By Manufacturer</a></li>
                                         <li><a href="/CardSet/searchByYear">List By Year</a></li>
                                         <li><a href="/CardSet/searchBySport">List By Sport</a></li>
                                     </ul>
@@ -61,8 +61,8 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">How to Use This Site</a></li>
-                                        <li><a href="#">File a Complaint</a></li>
                                         <li><a href="#">About Us</a></li>
+                                        <li><a href="/credits">Credits</a></li>
                                     </ul>
                                 </li>
                             <sec:ifLoggedIn>

@@ -1,0 +1,10 @@
+package com.cards
+
+import grails.transaction.Transactional
+import groovy.sql.Sql
+import groovy.sql.GroovyRowResult
+
+@Transactional
+class CardSetService {
+
+}

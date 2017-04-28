@@ -15,21 +15,25 @@ class CardSetController {
         respond CardSet.list(params), model:[cardSetCount: CardSet.count()]
     }
 
-    @Secured([Role.ROLE_USER])
+    @Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
     def showAllCardSets() {
         render view: 'index'
     }
 
-    def searchByManufacturer() {
+	@Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
+    def searchByBrand() {
         List allBrands = Brand.findAll()
         render view: 'byBrand', model:[brands:allBrands]
     }
 
+	@Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
     def searchByYear() {
-        List allYears = CardSet.findAll()
+		def allYears = CardSet.findAll().year
+		allYears = allYears.sort{it}.unique()
         render view: 'byYear', model:[years:allYears]
     }
 
+	@Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
     def searchBySport() {
         List allSports = Sport.findAll()
         render view: 'bySport', model:[sports:allSports]

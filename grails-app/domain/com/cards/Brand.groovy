@@ -9,4 +9,8 @@ class Brand {
 
     static constraints = {
     }
+
+    String toString() {
+        return name
+    }
 }

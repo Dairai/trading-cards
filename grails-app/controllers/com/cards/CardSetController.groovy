@@ -8,6 +8,11 @@ import grails.plugin.springsecurity.annotation.Secured
 @Secured([Role.ROLE_ADMIN])
 class CardSetController {
 
+	static scaffold = CardSet
+
+	def springSecurityService
+	def CardSetService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -55,9 +60,14 @@ class CardSetController {
 
     @Secured([Role.ROLE_USER,Role.ROLE_ADMIN])
     def userSets() {
-        List usersets = CardSet.findAll()
-        render view: 'showUserSets', model:[usersets:usersets]
+		def usersets = CardSetService.getUserSets()
+        render usersets
     }
+
+	@Secured([Role.ROLE_USER,Role.ROLE_ADMIN])
+	def myTrades() {
+		render view: 'myTrades'
+	}
 
     @Secured([Role.ROLE_ADMIN, Role.ROLE_USER])
     def userInput() {

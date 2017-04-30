@@ -42,17 +42,27 @@
                         <ul class="nav navbar-nav navbar-right">
                             <g:pageProperty name="page.nav" />
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">How To Join<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Membership</a></li>
-                                        <li><a href="#">Join Now!</a></li>
-                                        <li><a href="#">Site Rules</a></li>
-                                    </ul>
+                                    <sec:ifLoggedIn>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/CardSet/userSets">My Sets</a></li>
+                                            <li><a href="#">My Trades</a></li>
+                                            <li><a href="#">My Profile</a></li>
+                                        </ul>
+                                    </sec:ifLoggedIn>
+                                    <sec:ifNotLoggedIn>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">How To Join<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Membership</a></li>
+                                            <li><a href="#">Join Now!</a></li>
+                                            <li><a href="#">Site Rules</a></li>
+                                        </ul>
+                                    </sec:ifNotLoggedIn>
                                 </li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Current Sets<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="/CardSet/searchByBrand">List By Manufacturer</a></li>
+                                        <li><a href="/CardSet/searchByBrand">List By Brand</a></li>
                                         <li><a href="/CardSet/searchByYear">List By Year</a></li>
                                         <li><a href="/CardSet/searchBySport">List By Sport</a></li>
                                     </ul>
@@ -61,7 +71,7 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">How to Use This Site</a></li>
-                                        <li><a href="#">About Us</a></li>
+                                        <li><a href="#">About This Site</a></li>
                                         <li><a href="/credits">Credits</a></li>
                                     </ul>
                                 </li>
@@ -85,9 +95,10 @@
 
         <g:layoutBody/>
 
-        <div class="row">
+        <div class="row" id="footer">
             <div clas="col-lg-10">
                 <div class="footer" role="contentinfo" style="background-color: steelblue">
+                    Copyright 2017 - Morgan & Nyanbando
                 </div>
             </div>
         </div>

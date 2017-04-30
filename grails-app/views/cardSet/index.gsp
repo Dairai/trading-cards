@@ -1,26 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta name="layout" content="main"/>
-    <title>LFC Card Sets</title>
-</head>
-<body>
+    <head>
+        <meta name="layout" content="main" />
+        <g:set var="entityName" value="${message(code: 'brand.label', default: 'CardSet')}" />
+        <title><g:message code="default.list.label" args="[entityName]" /></title>
+    </head>
+    <body>
+        <a href="#list-cardset" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+        <div class="nav" role="navigation">
+            <ul>
+                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+            </ul>
+        </div>
+        <div id="list-cardset" class="content scaffold-list" role="main">
+            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
+            <g:if test="${flash.message}">
+                <div class="message" role="status">${flash.message}</div>
+            </g:if>
+            <f:table collection="${cardSetList}" />
 
-<div class="row" style="text-align:center;">
-    <div class="col-lg-offset-3 col-lg-6">
-        <h1 style="font-size: xx-large; font-weight: 800;">Card Sets in the Database</h1>
-    </div>
-</div>
-<div class="row" style="text-align:center;">
-    <div class="col-lg-4" style="font-size: large">
-        <a href="/CardSet/searchByManufacturer">Search By Manufacturer</a>
-    </div>
-    <div class="col-lg-4" style="font-size: large">
-        <a href="/CardSet/searchByYear">Search By Year</a>
-    </div>
-    <div class="col-lg-4" style="font-size: large">
-        <a href="/CardSet/searchBySport">Search By Sport</a>
-    </div>
-</div>
-</body>
+            <div class="pagination">
+                <g:paginate total="${cardSetCount ?: 0}" />
+            </div>
+        </div>
+    </body>
 </html>

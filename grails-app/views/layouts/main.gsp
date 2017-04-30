@@ -46,8 +46,8 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="/CardSet/userSets">My Sets</a></li>
-                                            <li><a href="#">My Trades</a></li>
-                                            <li><a href="#">My Profile</a></li>
+                                            <li><a href="/CardSet/myTrades">My Trades</a></li>
+                                            <li><a href="/userProfile">My Profile</a></li>
                                         </ul>
                                     </sec:ifLoggedIn>
                                     <sec:ifNotLoggedIn>

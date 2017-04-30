@@ -64,6 +64,11 @@ class CardSetController {
         render usersets
     }
 
+	@Secured([Role.ROLE_USER,Role.ROLE_ADMIN])
+	def myTrades() {
+		render view: 'myTrades'
+	}
+
     @Secured([Role.ROLE_ADMIN, Role.ROLE_USER])
     def userInput() {
         render view: 'userInput'

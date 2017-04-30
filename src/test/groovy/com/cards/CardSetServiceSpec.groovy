@@ -1,4 +1,4 @@
-package trading.cards
+package com.cards
 
 import grails.test.mixin.TestFor
 import spock.lang.Specification

@@ -31,3 +31,22 @@ function modify_qty(val) {
     document.getElementById('qty').value = new_qty;
     return new_qty;
 }
+
+function colorDiv() {
+    var qty = document.getElementById('qty').value;
+    var div = document.getElementById('box');
+    var qty_int = parseInt(qty,10);
+    div.style.backgroundColor = '#444';
+
+    switch (qty_int) {
+        case -1:
+            div.style.backgroundColor = '#ff9999';
+            break;
+        case 0:
+            div.style.backgroundColor = '#444';
+            break;
+        default:
+            div.style.backgroundColor = '#85e085';
+            break;
+    }
+}

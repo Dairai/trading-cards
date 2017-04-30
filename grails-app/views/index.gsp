@@ -8,8 +8,16 @@
 
 <div class="row" style="text-align:center;">
     <div class="col-lg-offset-1 col-lg-10" style="background-color: steelblue">
-        <asset:image src="logo2.jpg" style="width:80%"/>
+        <asset:image src="logo2.jpg" style="width:60%"/>
     </div>
+</div>
+<br />
+<div class="row" style="text-align: center">
+	<div class="col-lg-offset-3 col-lg-6" style="background-color: #d9534f">
+		<p style="font-weight: 600">
+			To use USER functionality, sign in with: <br /> usernamer:dm123 / password:secret
+		</p>
+	</div>
 </div>
 <div class="row" style="text-align:center;">
     <div class="col-lg-offset-3 col-lg-6">

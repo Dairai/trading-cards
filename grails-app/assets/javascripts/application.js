@@ -20,8 +20,9 @@ if (typeof jQuery !== 'undefined') {
     })(jQuery);
 }
 
-function modify_qty(val) {
+function modify_qty(val,i) {
     var qty = document.getElementById('qty').value;
+
     var new_qty = parseInt(qty,10) + val;
 
     if (new_qty < -1) {

@@ -3,6 +3,8 @@ package com.cards
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
+import groovy.sql.Sql
+import groovy.sql.GroovyRowResult
 
 @Transactional(readOnly = true)
 @Secured([Role.ROLE_ADMIN])
@@ -25,7 +27,7 @@ class CardSetController {
         render view: 'searchType'
     }
 
-	@Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS])
+	@Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
     def searchByBrand() {
         List allBrands = Brand.findAll()
         render view: 'byBrand', model:[brands:allBrands]
@@ -53,15 +55,22 @@ class CardSetController {
     }
 
     @Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
-    def showCardSet(CardSet cardset) {
-        def thiscardset = CardSet.find(cardset)
-        render view: 'showCardSet', model:[thiscardset:thiscardset]
+    def showCardSet() {
+		def year = params.year
+	    def brandname = params.brand
+	    def brand = Brand.findByName(brandname)
+	    def sportname = params.sport
+	    def sport = Sport.findBySportName(sportname)
+        def thiscardset = CardSet.findByYearAndBrandAndSport(year,brand,sport)
+	    List cardsInSet = Card.findAllByCardSet(thiscardset)
+	    def cardCount = CardSetService.getCardCount(cardsInSet)
+        render view: 'showCardSet', model:[thiscardset:thiscardset, cardcount:cardCount]
     }
 
     @Secured([Role.ROLE_USER,Role.ROLE_ADMIN])
     def userSets() {
 		def usersets = CardSetService.getUserSets()
-        render usersets
+        render view: 'showUserSets', model: [usersets:usersets]
     }
 
 	@Secured([Role.ROLE_USER,Role.ROLE_ADMIN])

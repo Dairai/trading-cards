@@ -25,7 +25,7 @@ class BrandSpec extends Specification {
             !newBrand.validate()
 
         when: "New brand is created with a name"
-            newBrand = new Brand(name: "Test Brand")
+            newBrand = new Brand(name: "Test Brand", logo_url:"www.google.com")
 
         then:"there object is valid"
             newBrand.validate()
@@ -35,7 +35,7 @@ class BrandSpec extends Specification {
     void "Test card sets addition to the brand"() {
         when:"New brand is created with a card set"
             CardSet set = new CardSet()
-            Brand newBrand = new Brand(name:"test brand")
+            Brand newBrand = new Brand(name:"test brand", logo_url:"www.google.com")
             newBrand.addToCardSets(set)
 
 

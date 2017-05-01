@@ -24,5 +24,7 @@ class CardSet implements Serializable{
         //brand(unique:['year','sport'])   // need to fix this...not working as intended - I added the sport part, and now not working....thought I did it right with the brackets
         numCardsInSet min:1
         numCardsInSet max:1000
+        id(unique: ['year','sport','brand'])
+        //cards(minSize: 1,maxSize: 1000)
     }
 }

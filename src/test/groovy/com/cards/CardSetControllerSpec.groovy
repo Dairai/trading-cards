@@ -16,17 +16,18 @@ class CardSetControllerSpec extends Specification {
         def brand2 = new Brand(logo_url: "www.sweets.com",name: "Brand new 2").save(flush: true, failOnError:true)
 
         def sport1 = new Sport(sportImage: "www.espn.com",sportName: "Soccer").save(flush: true, failOnError:true)
-        def cardset1 = new CardSet(year: 2003 , brand: brand1,cardSetImageURL: "www.youtube.com",numCardsInSet: 1,sport: sport1).
-                save(flush: true, failOnError:true)
-        def cardset2 = new CardSet(year: 2006 , brand: brand1,cardSetImageURL: "www.youtube.com",numCardsInSet: 1,sport: sport1).
-                save(flush: true, failOnError:true)
-        def card1 = new Card(number: 3,set: cardset1).save(flush: true, failOnError:true)
-        def card2 = new Card(number: 3,set: cardset2).save(flush: true, failOnError:true)
+        def cardset1 = new CardSet(year: 2003 , brand: brand1,
+                cardSetImageURL: "www.youtube.com",numCardsInSet: 1,sport: sport1)//.save(flush: true, failOnError:true)
+        def cardset2 = new CardSet(year: 2006 , brand: brand1,
+                cardSetImageURL: "www.youtube.com",numCardsInSet: 1,sport: sport1)//.save(flush: true, failOnError:true)
+        def card1 = new Card(number: 3,cardSet: cardset1)//.save(flush: true, failOnError:true)
+        def card2 = new Card(number: 4,cardSet: cardset2)//.save(flush: true, failOnError:true)
 
         cardset1.addToCards(card1)
         cardset2.addToCards(card2)
-
-        cardset1.save(flush: true, failOnError:true)
+        card1.save(failOnError:true)
+        card2.save(failOnError:true)
+        cardset1.save(failOnError:true)
         cardset2.save(flush: true, failOnError:true)
     }
 
@@ -37,7 +38,7 @@ class CardSetControllerSpec extends Specification {
         when:"retrieving all card sets"
             controller.showAllCardSets()
         then:"return the index view"
-            view == "/cardSet/index"
+            view == "/cardSet/searchType"
     }
 
     void "test searchByBrand method"(){

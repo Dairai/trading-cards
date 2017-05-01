@@ -98,7 +98,7 @@
         <div class="row" id="footer">
             <div clas="col-lg-10">
                 <div class="footer" role="contentinfo" style="background-color: steelblue">
-                    Copyright 2017 - Morgan & Nyanbando
+                    Copyright 2017 - Morgan & Nyabando
                 </div>
             </div>
         </div>

@@ -30,7 +30,7 @@ class CardSpec extends Specification {
 
         when:"new card is created with a valid number"
             CardSet testSet = new CardSet()
-            newCard = new Card(number: 12324,set: testSet)
+            newCard = new Card(number: 12324,cardSet: testSet)
 
         then:"Card is valid"
             newCard.validate()

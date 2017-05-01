@@ -5,6 +5,7 @@ class Sport {
     String sportName
     String sportImage
 
+
     String toString() {
         return sportName
     }
@@ -13,5 +14,6 @@ class Sport {
 
     static constraints = {
         sportName inList: ['Baseball', 'Hockey', 'Football', 'Soccer', 'Basketball']
+
     }
 }

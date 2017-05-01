@@ -1,5 +1,6 @@
 package com.cards
 
+import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
@@ -7,6 +8,7 @@ import spock.lang.Specification
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
 @TestFor(CardSet)
+@Mock([CardSet,Card, Brand,Sport])
 class CardSetSpec extends Specification {
 
     def setup() {
@@ -37,7 +39,10 @@ class CardSetSpec extends Specification {
             !testSet.validate()
 
         when:"a card set is created with a brand and year"
-            testSet  = new CardSet(year: 2013, brand: brand)
+            def newCard = new Card(number: 12324)
+            testSet  = new CardSet(year: 2013, brand: brand,
+                    cardSetImageURL: "www.google.com", sport: new Sport(),  numCardsInSet: 1)
+            testSet.addToCards(newCard)
 
         then:"the object is valid"
             testSet.validate()
@@ -47,14 +52,17 @@ class CardSetSpec extends Specification {
     {
         when:"a card set is created with a brand and year below 2013"
             Brand brand = new Brand(name: "Test brand")
-            CardSet testSet1  = new CardSet( year: 2013, brand: brand).save()
-
+            def sport1 = new Sport(sportName: "Soccer",sportImage: "www.google.com")
+            CardSet testSet1  = new CardSet( year: 2013, brand:
+                    brand,sport: sport1,cardSetImageURL: "test.url", numCardsInSet: 1).save(failOnError:true)
+            testSet1.addToCards(new Card())
         then:"the object is valid"
             testSet1.validate()
 
         when:"another card set is created with the same brand and year"
-            CardSet testSet2  = new CardSet(year: 2013, brand: brand).save()
-
+            CardSet testSet2  = new CardSet(year: 2013, brand: brand
+                    , sport: sport1, cardSetImageURL: "test.url",  numCardsInSet: 1).save(failOnError:true)
+            testSet2.addToCards(new Card())
         then:"the object is valid"
             testSet2.validate()
     }

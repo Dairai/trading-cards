@@ -10,7 +10,7 @@
 <div class="row" style="text-align:center;">
 	<div class="col-lg-offset-3 col-lg-6">
 		<h1 style="font-size: xx-large; font-weight: 800;">${thiscardset.year} ${thiscardset.brand.name} ${thiscardset.sport.sportName}</h1>
-		<h3>Cards I am looking for or have extra to trade</h3>
+		<h3>Cards you are looking for or have extra to trade</h3>
 		<br />
 	</div>
 </div>
@@ -26,6 +26,11 @@
 		</div>
 	</g:each>
 </div>
-
+<br />
+<div class="row">
+    <div class="col-lg-6">
+        <button class="btn-danger btn-lg" style="box-shadow: 5px 5px 3px #888888">Save Changes</button>
+    </div>
+</div>
 </body>
 </html>

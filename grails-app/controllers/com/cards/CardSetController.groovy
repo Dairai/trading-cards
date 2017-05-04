@@ -75,9 +75,9 @@ class CardSetController {
         def sportname = params.sport
         def sport = Sport.findBySportName(sportname)
         def thiscardset = CardSet.findByYearAndBrandAndSport(year,brand,sport)
-        List cardsInSet = Card.findAllByCardSet(thiscardset)
-        def cardCount = CardSetService.getCardCount(cardsInSet)
-        render view: 'userCardSet', model:[thiscardset:thiscardset, cardcount:cardCount]
+        def cardsThisUser = CardSetService.getUserPerCardCount(thiscardset.id)
+        render cardsThisUser
+        render view: 'userCardSet', model:[thiscardset:thiscardset]
     }
 
     @Secured([Role.ROLE_USER,Role.ROLE_ADMIN])

@@ -56,15 +56,28 @@ class CardSetController {
 
     @Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
     def showCardSet() {
-		def year = params.year
-	    def brandname = params.brand
-	    def brand = Brand.findByName(brandname)
-	    def sportname = params.sport
-	    def sport = Sport.findBySportName(sportname)
+        def year = params.year
+        def brandname = params.brand
+        def brand = Brand.findByName(brandname)
+        def sportname = params.sport
+        def sport = Sport.findBySportName(sportname)
         def thiscardset = CardSet.findByYearAndBrandAndSport(year,brand,sport)
-	    List cardsInSet = Card.findAllByCardSet(thiscardset)
-	    def cardCount = CardSetService.getCardCount(cardsInSet)
+        List cardsInSet = Card.findAllByCardSet(thiscardset)
+        def cardCount = CardSetService.getCardCount(cardsInSet)
         render view: 'showCardSet', model:[thiscardset:thiscardset, cardcount:cardCount]
+    }
+
+    @Secured([Role.ROLE_USER])
+    def userCardSet() {
+        def year = params.year
+        def brandname = params.brand
+        def brand = Brand.findByName(brandname)
+        def sportname = params.sport
+        def sport = Sport.findBySportName(sportname)
+        def thiscardset = CardSet.findByYearAndBrandAndSport(year,brand,sport)
+        List cardsInSet = Card.findAllByCardSet(thiscardset)
+        def cardCount = CardSetService.getCardCount(cardsInSet)
+        render view: 'userCardSet', model:[thiscardset:thiscardset, cardcount:cardCount]
     }
 
     @Secured([Role.ROLE_USER,Role.ROLE_ADMIN])

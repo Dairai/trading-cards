@@ -69,6 +69,7 @@ class CardSetController {
 
     @Secured([Role.ROLE_USER])
     def userCardSet() {
+        def currentUser = springSecurityService.getCurrentUser()
         def year = params.year
         def brandname = params.brand
         def brand = Brand.findByName(brandname)
@@ -81,10 +82,12 @@ class CardSetController {
                                         "FROM card_set, card, user_card, user\n" +
                                         "WHERE   user_card.card_id = card.id\n" +
                                         "AND user_card.user_id = user.id\n" +
-                                        "AND card_set.id = 1\n" +
-                                        "AND user.id = 5\n" +
+                                        "AND card_set.id = card.card_set_id\n" +
+                                        "AND card_set_id = ${thiscardset.id}\n" +
+                                        "AND user.id = ${currentUser.id}\n" +
                                         "ORDER BY card.number;")
         sql.close()
+
         render view: 'userCardSet', model:[thiscardset:thiscardset, cardsthisuser:cardsThisUser]
     }
 

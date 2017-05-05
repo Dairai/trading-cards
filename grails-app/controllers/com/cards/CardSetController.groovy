@@ -75,9 +75,16 @@ class CardSetController {
         def sportname = params.sport
         def sport = Sport.findBySportName(sportname)
         def thiscardset = CardSet.findByYearAndBrandAndSport(year,brand,sport)
-        def cardsThisUser = CardSetService.getUserPerCardCount(thiscardset.id)
-        render cardsThisUser
-        render view: 'userCardSet', model:[thiscardset:thiscardset]
+        //def cardsThisUser = CardSetService.getUserPerCardCount(thiscardset.id)
+        def sql = Sql.newInstance("jdbc:mysql://tradingcards.cjfl2qrl5jho.us-east-1.rds.amazonaws.com:3306/cards", "admin", "Grailse56", "com.mysql.jdbc.Driver")
+        def cardsThisUser = sql.rows("SELECT card.number, qty\n" +
+                                        "FROM card_set, card, user_card, user\n" +
+                                        "WHERE   user_card.card_id = card.id\n" +
+                                        "AND user_card.user_id = user.id\n" +
+                                        "AND card_set.id = 1\n" +
+                                        "AND user.id = 5;")
+        sql.close()
+        render view: 'userCardSet', model:[thiscardset:thiscardset, cardsthisuser:cardsThisUser]
     }
 
     @Secured([Role.ROLE_USER,Role.ROLE_ADMIN])

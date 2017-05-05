@@ -8,7 +8,7 @@
 <body>
 
 <div class="row" style="text-align:center;">
-	<div class="col-lg-offset-3 col-lg-6">
+	<div class="col-lg-offset-3 col-lg-6 col-xs">
 		<h1 style="font-size: xx-large; font-weight: 800;">${thiscardset.year} ${thiscardset.brand.name} ${thiscardset.sport.sportName}</h1>
 		<h3>Cards you are looking for or have extra to trade</h3>
 		<br />

@@ -15,21 +15,16 @@
 	</div>
 </div>
 <div class="row">
-	<g:each var="i" in="${1..thiscardset.numCardsInSet}">
-		<div class="col-1" style="display: inline-block; padding:3px">
-			<div class="clickbox" id="box${i}" style="color:red;">
-				<span style="float:left; padding:1px 0px 0px 1px; font-size:smaller"> ${i}</span>
-				<input id="qty${i}" value="0" style="padding:0px; margin:0; font-size:x-large" readonly/>
-				<button style="width: 20px; height:20px; padding:0px" class="count" id="up${i}" onclick="modify_qty(1,${i});colorDiv(${i})">▲</button>
-				<button style="width: 20px; height:20px; padding:0px" class="count" id="down${i}" onclick="modify_qty(-1,${i});colorDiv(${i})">▼</button>
-			</div>
-		</div>
+	<g:each var="card" in="${cardsthisuser}">
+		<g:render template="cardCounter" model="[card:card]" />
 	</g:each>
 </div>
 <br />
 <div class="row">
     <div class="col-lg-6">
         <button class="btn-danger btn-lg" style="box-shadow: 5px 5px 3px #888888">Save Changes</button>
+        <a href=""><button class="btn-primary btn-lg" style="box-shadow: 5px 5px 3px #888888">Reset</button></a>
+
     </div>
 </div>
 </body>

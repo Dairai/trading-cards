@@ -82,7 +82,8 @@ class CardSetController {
                                         "WHERE   user_card.card_id = card.id\n" +
                                         "AND user_card.user_id = user.id\n" +
                                         "AND card_set.id = 1\n" +
-                                        "AND user.id = 5;")
+                                        "AND user.id = 5\n" +
+                                        "ORDER BY card.number;")
         sql.close()
         render view: 'userCardSet', model:[thiscardset:thiscardset, cardsthisuser:cardsThisUser]
     }

@@ -19,8 +19,7 @@
 	<meta name="theme-color" content="#ffffff">
 </head>
 
-<body>
-    <div class="container">
+<div class="container">
         <div class="row">
             <div class="col">
                 <div class="navbar navbar-default navbar-static-top" role="navigation" style="background-color: steelblue">
@@ -53,9 +52,9 @@
                                     <sec:ifNotLoggedIn>
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">How To Join<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#">Membership</a></li>
-                                            <li><a href="#">Join Now!</a></li>
-                                            <li><a href="#">Site Rules</a></li>
+                                            <li><a href="/membership.gsp">Membership</a></li>
+                                            <li><a href="/membership.gsp">Join Now!</a></li>
+                                            <li><a href="/siterules">Site Rules</a></li>
                                         </ul>
                                     </sec:ifNotLoggedIn>
                                 </li>
@@ -70,9 +69,9 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">How to Use This Site</a></li>
-                                        <li><a href="#">About This Site</a></li>
-                                        <li><a href="/credits">Credits</a></li>
+                                        <li><a href="/howtouse">How to Use This Site</a></li>
+                                        <li><a href="/about.gsp">About This Site</a></li>
+                                        <li><a href="/credits.gsp">Credits</a></li>
                                     </ul>
                                 </li>
                             <sec:ifLoggedIn>
@@ -95,15 +94,16 @@
 
         <g:layoutBody/>
 
-        <div class="row" id="footer">
-            <div clas="col-lg-10">
-                <div class="footer" role="contentinfo" style="background-color: steelblue">
-                    Copyright 2017 - Morgan & Nyabando
-                </div>
-            </div>
-        </div>
-    </div>
 
+        <div class="row" id="footer2">
+			<div class="col-lg-10">
+				<div class="footer" role="contentinfo" style="background-color: steelblue">
+					Copyright 2017 - Morgan & Nyabando
+				</div>
+			</div>
+        </div>
+
+</div>
 	<asset:javascript src="jquery-2.2.0.min.js" />
 	<asset:javascript src="application.js"/>
 

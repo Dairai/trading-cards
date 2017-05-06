@@ -10,19 +10,19 @@
 <div class="row" style="text-align:center;">
     <div class="col-lg-offset-3 col-lg-6">
         <h1 style="font-size: xx-large; font-weight: 800;">${thiscardset.year} ${thiscardset.brand.name} ${thiscardset.sport.sportName}</h1>
-        <h3>Cards currently available for trade</h3>
+        <h3>Total cards available from all users</h3>
 	    <br />
     </div>
 </div>
 <div class="row">
-	<g:each var="i" in="${1..thiscardset.numCardsInSet}">
-		<div class="col-1" style="display: inline-block; padding:3px">
-			<div class="clickbox" id="box" style="color:red; height: 4em;">
-				<span style="float:left; padding:1px 0px 0px 1px; font-size:smaller"> ${i}</span>
-				<input id="qty" value="3" style="padding:0px; margin:0; font-size:x-large" readonly/>
-			</div>
-		</div>
-	</g:each>
+	<g:if test="${totalcardcount == []}">
+		<h1 style="color:red; text-align:center; font-size:xx-large">No cards have been entered for this set</h1>
+	</g:if>
+	<g:else>
+		<g:each var="card" in="${totalcardcount}">
+			<g:render template="totalCardCounter" model="[card:card]" />
+		</g:each>
+	</g:else>
 </div>
 
 </body>

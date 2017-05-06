@@ -21,7 +21,7 @@ if (typeof jQuery !== 'undefined') {
 }
 
 function modify_qty(val,i) {
-    var qty = document.getElementById('qty').value;
+    var qty = document.getElementById('qty' + i).value;
 
     var new_qty = parseInt(qty,10) + val;
 
@@ -29,13 +29,13 @@ function modify_qty(val,i) {
         new_qty = 0;
     }
 
-    document.getElementById('qty').value = new_qty;
+    document.getElementById('qty' + i).value = new_qty;
     return new_qty;
 }
 
-function colorDiv() {
-    var qty = document.getElementById('qty').value;
-    var div = document.getElementById('box');
+function colorDiv(i) {
+    var qty = document.getElementById('qty'+i).value;
+    var div = document.getElementById('box'+i);
     var qty_int = parseInt(qty,10);
     div.style.backgroundColor = '#444';
 

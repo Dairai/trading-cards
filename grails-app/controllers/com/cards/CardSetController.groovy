@@ -56,15 +56,46 @@ class CardSetController {
 
     @Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
     def showCardSet() {
-		def year = params.year
-	    def brandname = params.brand
-	    def brand = Brand.findByName(brandname)
-	    def sportname = params.sport
-	    def sport = Sport.findBySportName(sportname)
+        def year = params.year
+        def brandname = params.brand
+        def brand = Brand.findByName(brandname)
+        def sportname = params.sport
+        def sport = Sport.findBySportName(sportname)
         def thiscardset = CardSet.findByYearAndBrandAndSport(year,brand,sport)
-	    List cardsInSet = Card.findAllByCardSet(thiscardset)
-	    def cardCount = CardSetService.getCardCount(cardsInSet)
+        List cardsInSet = Card.findAllByCardSet(thiscardset)
+        def cardCount = CardSetService.getCardCount(cardsInSet)
         render view: 'showCardSet', model:[thiscardset:thiscardset, cardcount:cardCount]
+    }
+
+    @Secured([Role.ROLE_USER])
+    def userCardSet() {
+        def currentUser = springSecurityService.getCurrentUser()
+        def year = params.year
+        def brandname = params.brand
+        def brand = Brand.findByName(brandname)
+        def sportname = params.sport
+        def sport = Sport.findBySportName(sportname)
+        def thiscardset = CardSet.findByYearAndBrandAndSport(year,brand,sport)
+        //def cardsThisUser = CardSetService.getUserPerCardCount(thiscardset.id)
+        def sql = Sql.newInstance("jdbc:mysql://tradingcards.cjfl2qrl5jho.us-east-1.rds.amazonaws.com:3306/cards", "admin", "Grailse56", "com.mysql.jdbc.Driver")
+        def cardsThisUser = sql.rows("SELECT card.number, qty\n" +
+                                        "FROM card_set, card, user_card, user\n" +
+                                        "WHERE   user_card.card_id = card.id\n" +
+                                        "AND user_card.user_id = user.id\n" +
+                                        "AND card_set.id = card.card_set_id\n" +
+                                        "AND card_set_id = ${thiscardset.id}\n" +
+                                        "AND user.id = ${currentUser.id}\n" +
+                                        "ORDER BY card.number;")
+        sql.close()
+
+        each (1..thiscardset.numCardsInSet) { number ->
+            for (1..thiscardset.numCardsInSet) {
+                cardsThisUser << "number:" + number + ", qty:0"
+            }
+        }
+
+        render cardsThisUser
+        //render view: 'userCardSet', model:[thiscardset:thiscardset, cardsthisuser:cardsThisUser]
     }
 
     @Secured([Role.ROLE_USER,Role.ROLE_ADMIN])

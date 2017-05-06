@@ -88,14 +88,14 @@ class CardSetController {
                                         "ORDER BY card.number;")
         sql.close()
 
-        each (1..thiscardset.numCardsInSet) { number ->
-            for (1..thiscardset.numCardsInSet) {
-                cardsThisUser << "number:" + number + ", qty:0"
-            }
+        if(cardsThisUser == []) {
+	        for (def i=1; i <= thiscardset.numCardsInSet; i++) {
+		        def temp = ['number':i, qty:0]
+		        cardsThisUser << temp
+	        }
         }
 
-        render cardsThisUser
-        //render view: 'userCardSet', model:[thiscardset:thiscardset, cardsthisuser:cardsThisUser]
+        render view: 'userCardSet', model:[thiscardset:thiscardset, cardsthisuser:cardsThisUser]
     }
 
     @Secured([Role.ROLE_USER,Role.ROLE_ADMIN])

@@ -7,25 +7,19 @@
 <body>
 
 <div class="row" style="text-align:center;">
-	<div class="col-lg-offset-1 col-lg-10" style="background-color: steelblue">
-		<asset:image src="logo2.jpg" style="width:60%"/>
-	</div>
-</div>
-
-<div class="row" style="text-align:center;">
-	<div class="col-lg-offset-3 col-lg-6">
-		<h1 style="font-size: xx-large; font-weight: 800;">How To Use This Site</h1>
+	<div class="col-lg-offset-3 col-lg-6" style="text-align: left">
+		<h1 style="font-size: xx-large; font-weight: 800; text-align: center">How To Use This Site</h1>
 
 		<section>
-			<h2>Searching for Sets</h2>
+			<h2 style="font-weight: 600">Searching for Sets</h2>
 		</section>
 
 		<section>
-			<h2>Inputing Your Cards (Wants & Extras)</h2>
+			<h2 style="font-weight: 600">Inputing Your Cards (Wants & Extras)</h2>
 		</section>
 
 		<section>
-			<h2>Future Upgrades</h2>
+			<h2 style="font-weight: 600">Future Upgrades</h2>
 			<ul>
 				<li>ability to search by user</li>
 				<li>advanced search queries to find other users with the most cards you need (provides huge gains in efficiency of trading/selling/buying cards)</li>

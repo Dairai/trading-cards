@@ -6,11 +6,6 @@
 </head>
 <body>
 
-<div class="row" style="text-align:center;">
-	<div class="col-lg-offset-1 col-lg-10" style="background-color: steelblue">
-		<asset:image src="logo2.jpg" style="width:60%"/>
-	</div>
-</div>
 
 <div class="row" style="text-align:center;">
 	<div class="col-lg-offset-3 col-lg-6">

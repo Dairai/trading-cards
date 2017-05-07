@@ -52,8 +52,8 @@
                                     <sec:ifNotLoggedIn>
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">How To Join<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="/membership.gsp">Membership</a></li>
-                                            <li><a href="/membership.gsp">Join Now!</a></li>
+                                            <li><a href="/membership">Membership</a></li>
+                                            <li><a href="/membership">Join Now!</a></li>
                                             <li><a href="/siterules">Site Rules</a></li>
                                         </ul>
                                     </sec:ifNotLoggedIn>
@@ -70,8 +70,8 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="/howtouse">How to Use This Site</a></li>
-                                        <li><a href="/about.gsp">About This Site</a></li>
-                                        <li><a href="/credits.gsp">Credits</a></li>
+                                        <li><a href="/about">About This Site</a></li>
+                                        <li><a href="/credits">Credits</a></li>
                                     </ul>
                                 </li>
                             <sec:ifLoggedIn>

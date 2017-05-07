@@ -7,38 +7,44 @@ import groovy.sql.Sql
 class CardSetService {
 
 	def springSecurityService
+	def dataSource
 
-    def getUserSets() {
-	    def user = springSecurityService.getCurrentUser()
-	    List usersets = CardSet.findAll()
-	    return usersets
-    }
+	def getUserSets() {
+		def user = springSecurityService.getCurrentUser()
+		List usersets = CardSet.findAll()
+		return usersets
+	}
 
-	def getUserPerCardCount(int id) {
-		def cardcount = [:]
-        def currentUser = springSecurityService.getCurrentUser()
-        def currentCardSet = CardSet.findById(id)
+	def allUsersCardCount(int id) {
+		def sql = Sql.newInstance(dataSource)
+		def totalCardCount = sql.rows("SELECT card.number, SUM(qty) qty\n" +
+				"FROM card_set, card, user_card\n" +
+				"WHERE card_set.id = card.card_set_id\n" +
+				"AND user_card.card_id = card.id\n" +
+				"AND card_set.id = ${id}\n" +
+				"GROUP BY card.number ORDER BY card.number;")
+		sql.close()
+		return totalCardCount
+	}
 
-        def dataSource
-        /*def results = {
-            def sql = new Sql(dataSource)
-            [temp: sql.rows("SELECT card.number, qty \n" +
-                            "FROM card_set, card, user_card, user\n" +
-                            "WHERE   user_card.card_id = card.id \n" +
-                            "AND user_card.user_id = user.id \n" +
-                            "AND card_set.id = 1\n" +
-                            "AND user.id = 5;")]
-        }*/
+	def currentUserCardCount(long userid, int setid, int numcards) {
+		def sql = Sql.newInstance(dataSource)
+		def cardsThisUser = sql.rows("SELECT card.number, qty\n" +
+				"FROM card_set, card, user_card, user\n" +
+				"WHERE   user_card.card_id = card.id\n" +
+				"AND user_card.user_id = user.id\n" +
+				"AND card_set.id = card.card_set_id\n" +
+				"AND card_set_id = ${setid}\n" +
+				"AND user.id = ${userid}\n" +
+				"ORDER BY card.number;")
+		sql.close()
 
-        def sql = new Sql(dataSource)
-        def rows = sql.rows("SELECT card.number, qty \\n\" +\n" +
-                "                            \"FROM card_set, card, user_card, user\\n\" +\n" +
-                "                            \"WHERE   user_card.card_id = card.id \\n\" +\n" +
-                "                            \"AND user_card.user_id = user.id \\n\" +\n" +
-                "                            \"AND card_set.id = 1\\n\" +\n" +
-                "                            \"AND user.id = 5;")
-        sql.close()
-
-		return rows
+		if(cardsThisUser == []) {
+			for (def i=1; i <= numcards; i++) {
+				def temp = ['number':i, qty:0]
+				cardsThisUser << temp
+			}
+		}
+		return cardsThisUser
 	}
 }

@@ -49,52 +49,39 @@ class CardSetController {
     }
 
 	@Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
+	def showYear() {
+		def year = params.year
+		List yearCardSets = CardSet.findAllByYear(year)
+		yearCardSets = yearCardSets.sort{it.brand}
+		render view: 'showYear', model:[yearcardsets:yearCardSets]
+	}
+
+	@Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
     def searchBySport() {
         List allSports = Sport.findAll()
         render view: 'bySport', model:[sports:allSports]
     }
 
+	@Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
+	def showSport() {
+		def sport = Sport.get(params.id)
+		List sportCardSets = CardSet.findAllBySport(sport)
+		sportCardSets = sportCardSets.sort{it.year}
+		render view: 'showSport', model:[sportcardsets:sportCardSets]
+	}
+
     @Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
     def showCardSet() {
-        def year = params.year
-        def brandname = params.brand
-        def brand = Brand.findByName(brandname)
-        def sportname = params.sport
-        def sport = Sport.findBySportName(sportname)
-        def thiscardset = CardSet.findByYearAndBrandAndSport(year,brand,sport)
-        List cardsInSet = Card.findAllByCardSet(thiscardset)
-        def cardCount = CardSetService.getCardCount(cardsInSet)
-        render view: 'showCardSet', model:[thiscardset:thiscardset, cardcount:cardCount]
+        def thiscardset = CardSet.findByYearAndBrandAndSport(params.year,Brand.findByName(params.brand),Sport.findBySportName(params.sport))
+	    def totalCardCount = CardSetService.allUsersCardCount(thiscardset.id)
+	    render view: 'showCardSet', model:[thiscardset:thiscardset, totalcardcount:totalCardCount]
     }
 
     @Secured([Role.ROLE_USER])
     def userCardSet() {
-        def currentUser = springSecurityService.getCurrentUser()
-        def year = params.year
-        def brandname = params.brand
-        def brand = Brand.findByName(brandname)
-        def sportname = params.sport
-        def sport = Sport.findBySportName(sportname)
-        def thiscardset = CardSet.findByYearAndBrandAndSport(year,brand,sport)
-        //def cardsThisUser = CardSetService.getUserPerCardCount(thiscardset.id)
-        def sql = Sql.newInstance("jdbc:mysql://tradingcards.cjfl2qrl5jho.us-east-1.rds.amazonaws.com:3306/cards", "admin", "Grailse56", "com.mysql.jdbc.Driver")
-        def cardsThisUser = sql.rows("SELECT card.number, qty\n" +
-                                        "FROM card_set, card, user_card, user\n" +
-                                        "WHERE   user_card.card_id = card.id\n" +
-                                        "AND user_card.user_id = user.id\n" +
-                                        "AND card_set.id = card.card_set_id\n" +
-                                        "AND card_set_id = ${thiscardset.id}\n" +
-                                        "AND user.id = ${currentUser.id}\n" +
-                                        "ORDER BY card.number;")
-        sql.close()
-
-        if(cardsThisUser == []) {
-	        for (def i=1; i <= thiscardset.numCardsInSet; i++) {
-		        def temp = ['number':i, qty:0]
-		        cardsThisUser << temp
-	        }
-        }
-
+        User currentUser = springSecurityService.getCurrentUser()
+        def thiscardset = CardSet.findByYearAndBrandAndSport(params.year,Brand.findByName(params.brand),Sport.findBySportName(params.sport))
+		def cardsThisUser = CardSetService.currentUserCardCount(currentUser.id, thiscardset.id, thiscardset.numCardsInSet)
         render view: 'userCardSet', model:[thiscardset:thiscardset, cardsthisuser:cardsThisUser]
     }
 

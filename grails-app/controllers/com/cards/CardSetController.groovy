@@ -64,7 +64,7 @@ class CardSetController {
 
 	@Secured([Role.ROLE_USER,Role.ROLE_ANONYMOUS,Role.ROLE_ADMIN])
 	def showSport() {
-		def sport = params.sport
+		def sport = Sport.get(params.id)
 		List sportCardSets = CardSet.findAllBySport(sport)
 		sportCardSets = sportCardSets.sort{it.year}
 		render view: 'showSport', model:[sportcardsets:sportCardSets]

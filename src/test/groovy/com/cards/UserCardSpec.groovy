@@ -15,8 +15,15 @@ class UserCardSpec extends Specification {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
+    void "test UserCard domain"() {
+        when:"creating a user card without parameters"
+            def usercard = new UserCard()
+        then:"sport is not valid"
+            !usercard.validate()
+
+        when:"user card with valid parameters"
+            usercard = new UserCard(qty: 1, card: new Card(),user: new User())
+        then:"Card is invalid"
+            usercard.validate()
     }
 }

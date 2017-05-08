@@ -14,10 +14,6 @@ class CardSet implements Serializable{
     static hasOne = [brand:Brand, sport:Sport]
     static hasMany = [cards:Card]
 
-    //static mapping = {
-    //   id composite: ['year','sport','brand']
-    //}
-
     static constraints = {
         year nullable:false
         year min: 1920
@@ -25,6 +21,5 @@ class CardSet implements Serializable{
         numCardsInSet min:1
         numCardsInSet max:1000
         id(unique: ['year','sport','brand'])
-        //cards(minSize: 1,maxSize: 1000)
     }
 }

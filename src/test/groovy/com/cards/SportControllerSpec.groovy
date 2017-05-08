@@ -9,10 +9,8 @@ class SportControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
-
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-        assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
+        params["sportName"] = 'Basketball'
+        params["sportImage"] = 'soccerpic.jpeg'
     }
 
     void "Test the index action returns the correct model"() {

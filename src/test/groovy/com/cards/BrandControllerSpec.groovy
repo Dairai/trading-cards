@@ -10,9 +10,8 @@ class BrandControllerSpec extends Specification {
     def populateValidParams(params) {
         assert params != null
 
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-        assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
+        params["name"] = 'Test Brand'
+        params["logo_url"] = "www.google.com"
     }
 
     void "Test the index action returns the correct model"() {
@@ -103,7 +102,7 @@ class BrandControllerSpec extends Specification {
 
         when:"An invalid domain instance is passed to the update action"
             response.reset()
-            def brand = new Brand()
+            def brand = new Brand(params)
             brand.validate()
             controller.update(brand)
 
@@ -114,7 +113,7 @@ class BrandControllerSpec extends Specification {
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            brand = new Brand(params).save(flush: true)
+            brand = new Brand(name: "Test Brand", logo_url:"www.google.com").save(flush: true)
             controller.update(brand)
 
         then:"A redirect is issued to the show action"

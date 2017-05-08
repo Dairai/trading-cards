@@ -15,8 +15,21 @@ class SportSpec extends Specification {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
+    void "test sport object validation"() {
+        when:"creating a sport without parameters"
+            def sport = new Sport()
+        then:"sport is not valid"
+            !sport.validate()
+
+        when:"creating a sport with wrong parameters"
+            sport = new Sport(sportImage:"sports.jpeg" , sportName: "Lacrosse")
+        then:"sport is not valid"
+            !sport.validate()
+
+        when:"creating a sport with valid parameters"
+            sport = new Sport(sportImage:"sports.jpeg" , sportName: "Soccer")
+        then:"sport is valid"
+            sport.validate()
+
     }
 }

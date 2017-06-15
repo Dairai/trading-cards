@@ -8,4 +8,6 @@ build/
 *.iws
 .project
 .settings
+classes/production/
+out/
 .classpath

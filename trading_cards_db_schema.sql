@@ -1,0 +1,141 @@
+CREATE DATABASE cards
+	CHARACTER SET latin1
+	COLLATE latin1_swedish_ci;
+	
+
+CREATE TABLE cards.brand (
+  id BIGINT(20) NOT NULL AUTO_INCREMENT,
+  version BIGINT(20) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  logo_url VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 7
+AVG_ROW_LENGTH = 2730
+CHARACTER SET latin1
+COLLATE latin1_swedish_ci;
+
+CREATE TABLE cards.card (
+  id BIGINT(20) NOT NULL AUTO_INCREMENT,
+  version BIGINT(20) NOT NULL,
+  number INT(11) NOT NULL,
+  card_set_id BIGINT(20) NOT NULL,
+  card_set_year INT(11) NOT NULL,
+  card_set_sport_id BIGINT(20) NOT NULL,
+  card_set_brand_id BIGINT(20) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE INDEX UK9ae3f2f5d5b083e753c45090ffd5 (card_set_id, number),
+  CONSTRAINT FK7qha0kl4v6eawyjd0mlgwiroc FOREIGN KEY (card_set_id)
+    REFERENCES cards.card_set(id) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 43
+AVG_ROW_LENGTH = 409
+CHARACTER SET latin1
+COLLATE latin1_swedish_ci;
+
+CREATE TABLE cards.card_set (
+  id BIGINT(20) NOT NULL AUTO_INCREMENT,
+  version BIGINT(20) NOT NULL,
+  year INT(11) NOT NULL,
+  brand_id BIGINT(20) NOT NULL,
+  card_set_imageurl VARCHAR(255) NOT NULL,
+  num_cards_in_set INT(11) NOT NULL,
+  sport_id BIGINT(20) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE INDEX UK7500760b8beff3ea80d25a47abf7 (sport_id, year, brand_id),
+  UNIQUE INDEX UKdc08abd1a714fc3a880834940744 (year, brand_id),
+  UNIQUE INDEX UKf9ed6254d7132612c21957dcbf4c (brand_id, sport_id, year, id),
+  CONSTRAINT FK7ylrxj0bubcm8x8wws53926na FOREIGN KEY (sport_id)
+    REFERENCES cards.sport(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT FKa7p92qyx0gmpmdk7pc5opap3n FOREIGN KEY (brand_id)
+    REFERENCES cards.brand(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT FKqysb0d3uo997n9fghjknacmxy FOREIGN KEY (sport_id)
+    REFERENCES cards.card_set(id) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 9
+AVG_ROW_LENGTH = 2048
+CHARACTER SET latin1
+COLLATE latin1_swedish_ci;
+
+CREATE TABLE cards.role (
+  id BIGINT(20) NOT NULL AUTO_INCREMENT,
+  version BIGINT(20) NOT NULL,
+  authority VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE INDEX UK_irsamgnera6angm0prq1kemt2 (authority)
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 3
+AVG_ROW_LENGTH = 8192
+CHARACTER SET latin1
+COLLATE latin1_swedish_ci;
+
+CREATE TABLE cards.sport (
+  id BIGINT(20) NOT NULL AUTO_INCREMENT,
+  version BIGINT(20) NOT NULL,
+  sportName VARCHAR(255) NOT NULL,
+  sport_name VARCHAR(12) NOT NULL,
+  sport_image VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 6
+AVG_ROW_LENGTH = 3276
+CHARACTER SET latin1
+COLLATE latin1_swedish_ci;
+
+CREATE TABLE cards.user (
+  id BIGINT(20) NOT NULL AUTO_INCREMENT,
+  version BIGINT(20) NOT NULL,
+  account_expired BIT(1) NOT NULL,
+  account_locked BIT(1) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  enabled BIT(1) NOT NULL,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  password_expired BIT(1) NOT NULL,
+  username VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE INDEX UK_sb8bbouer5wak8vyiiy4pf2bx (username)
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 9
+AVG_ROW_LENGTH = 3276
+CHARACTER SET latin1
+COLLATE latin1_swedish_ci;
+
+CREATE TABLE cards.user_card (
+  id BIGINT(20) NOT NULL AUTO_INCREMENT,
+  version BIGINT(20) NOT NULL,
+  qty INT(11) NOT NULL,
+  user_id BIGINT(20) NOT NULL,
+  card_id BIGINT(20) NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT FK441bl0wnj3hxcj8c18lyxw9e1 FOREIGN KEY (card_id)
+    REFERENCES cards.card(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT FKmeit1ul0skwyx74bewpxx8gml FOREIGN KEY (user_id)
+    REFERENCES cards.user(id) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 31
+AVG_ROW_LENGTH = 655
+CHARACTER SET latin1
+COLLATE latin1_swedish_ci;
+
+CREATE TABLE cards.user_role (
+  user_id BIGINT(20) NOT NULL,
+  role_id BIGINT(20) NOT NULL,
+  PRIMARY KEY (user_id, role_id),
+  CONSTRAINT FK859n2jvi8ivhui0rl0esws6o FOREIGN KEY (user_id)
+    REFERENCES cards.user(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT FKa68196081fvovjhkek5m97n3y FOREIGN KEY (role_id)
+    REFERENCES cards.role(id) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE = INNODB
+AVG_ROW_LENGTH = 2730
+CHARACTER SET latin1
+COLLATE latin1_swedish_ci;
